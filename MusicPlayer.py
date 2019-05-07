@@ -5,7 +5,7 @@ class MusicPlayer():
         mixer.init()
 
     def play(self, mood):
-        mixer.music.load(mood + '.mp3')
+        mixer.music.load('Music/' + mood + '.mp3')
         mixer.music.play()
 
     def stop(self):
