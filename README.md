@@ -20,4 +20,4 @@ Navigate to project folder through terminal.
 execute `python3 Camera.py`
 
 Play around with facial expressions!
-click 'w' to take a picture, 'space' to pause the music, and 'q' to quit the program.
+Click 'w' to take a picture, 'space' to pause the music, and 'q' to quit the program.
