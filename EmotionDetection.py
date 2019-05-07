@@ -1,43 +1,50 @@
-import requests
-import json
+import requests, json
+import MusicPlayer
 
-image = None
-keyFile = open("key.txt", "r")
-try:
-    image = open("snapshot.png", 'rb').read()
-except:
-    print("image not found")
+class EmotionDetection():
+    def __init__(self):
+        #self.image = None
+        keyFile = open("key.txt", "r")
 
-subscription_key = None
-if keyFile.mode == 'r':
-    subscription_key = keyFile.read()
-assert subscription_key
+        self.subscription_key = None
+        if keyFile.mode == 'r':
+            subscription_key = keyFile.read()
+        assert subscription_key
 
-face_api_url = 'https://canadacentral.api.cognitive.microsoft.com/face/v1.0/detect'
+        self.face_api_url = 'https://canadacentral.api.cognitive.microsoft.com/face/v1.0/detect'
 
-headers = {
-    'Ocp-Apim-Subscription-Key': subscription_key,
-    'Content-Type': 'application/octet-stream'
- }
+        self.headers = {
+            'Ocp-Apim-Subscription-Key': subscription_key,
+            'Content-Type': 'application/octet-stream'
+        }
+            
+        self.params = {
+            'returnFaceAttributes': 'emotion'
+        }
+
+    def getEmotion(self):
+        try:
+            image = open("snapshot.png", 'rb').read()
+        except:
+            print("image not found")
+
+        response = requests.post(self.face_api_url, params=self.params, headers=self.headers, data=image)
+        res = response.json()[0]['faceAttributes']['emotion']
+        #print(res)
+
+        emotions = {
+            'happiness': res['happiness'],
+            'sadness': res['sadness'],
+            'anger': res['anger']
+        }
+
+        max = 0
+
+        for emotion in emotions.values():
+            if emotion > max:
+                max = emotion
+
+        mood = list(emotions.keys())[list(emotions.values()).index(max)]
+        print(mood)
+        return mood
     
-params = {
-    'returnFaceAttributes': 'emotion'
-}
-
-response = requests.post(face_api_url, params=params, headers=headers, data=image)
-res = response.json()[0]['faceAttributes']['emotion']
-print(res)
-
-emotions = {
-    'happiness': res['happiness'],
-    'sadness': res['sadness'],
-    'anger': res['anger']
-}
-
-max = 0
-
-for emotion in emotions.values():
-    if emotion > max:
-        max = emotion
-
-print(list(emotions.keys())[list(emotions.values()).index(max)])
