@@ -1,5 +1,4 @@
 import requests, json
-import MusicPlayer
 
 class EmotionDetection():
     def __init__(self):
@@ -42,6 +41,6 @@ class EmotionDetection():
                 max = emotion
 
         mood = list(emotions.keys())[list(emotions.values()).index(max)]
-        print(mood)
+        print('Detected Emotion: ' + mood)
         return mood
     

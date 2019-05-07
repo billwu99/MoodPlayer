@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+from pygame import mixer
 import MusicPlayer
 import EmotionDetection
 
