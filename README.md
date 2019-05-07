@@ -17,5 +17,7 @@ Inside project folder make a file name key.txt and put one of your project keys 
 ## **How to Use**
 Navigate to project folder through terminal.
 
-exectute `python3 Camera.py`
+execute `python3 Camera.py`
 
+Play around with facial expressions!
+click 'w' to take a picture, 'space' to pause the music, and 'q' to quit the program.
