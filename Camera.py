@@ -34,9 +34,6 @@ while(True):
             player.stop()
             musicPlaying = False
 
-        
-
-
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()

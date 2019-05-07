@@ -3,10 +3,8 @@ import MusicPlayer
 
 class EmotionDetection():
     def __init__(self):
-        #self.image = None
         keyFile = open("key.txt", "r")
 
-        self.subscription_key = None
         if keyFile.mode == 'r':
             subscription_key = keyFile.read()
         assert subscription_key
@@ -30,7 +28,6 @@ class EmotionDetection():
 
         response = requests.post(self.face_api_url, params=self.params, headers=self.headers, data=image)
         res = response.json()[0]['faceAttributes']['emotion']
-        #print(res)
 
         emotions = {
             'happiness': res['happiness'],
